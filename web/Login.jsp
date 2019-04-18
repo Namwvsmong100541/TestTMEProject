@@ -22,7 +22,7 @@
         <div class="login">
             <div class="container">
                 <div class="logo">
-                    <img src="TestProjecttME\web\img-TME\alarm.png" alt="">
+                    <img src="TestProjectTME\web\img-TME\alarm.png" alt="">
 
                     <%
                         if (request.getAttribute("code") != null) {
