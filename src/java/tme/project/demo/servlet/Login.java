@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String target = "/login.jsp";
+        String target = "/Login.jsp";
         HttpSession session = request.getSession();
         String code = null;
         String alert = null;
