@@ -4,19 +4,18 @@
  * and open the template in the editor.
  */
 package tme.project.demo.datasource;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class ConnectionBuilder {
+public class TestConnectionDB {
 
-    public static Connection mainConnection = null;
+    public static void main(String[] args) {
 
-    public static Connection getConnection() {
         Connection con = null;
+
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             Properties property = new Properties();
@@ -25,9 +24,28 @@ public class ConnectionBuilder {
             property.put("useEncoding", "true");
             property.put("characterEncoding", "UTF-8");
             con = DriverManager.getConnection("jdbc:mariadb://35.240.139.209/tell_me_emergency?useUnicode=yes&amp;characterEncoding=utf8", property);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ConnectionBuilder.class.getName()).log(Level.SEVERE, null, ex);
+
+            if (con != null) {
+                System.out.println("Database Connected.");
+            } else {
+                System.out.println("Database Connect Failed.");
+            }
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        return con;
+
+        // Close
+        try {
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
+
 }
