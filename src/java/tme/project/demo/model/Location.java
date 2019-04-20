@@ -5,7 +5,16 @@
  */
 package tme.project.demo.model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import tme.project.demo.datasource.ConnectionBuilder;
 
 /**
  *
@@ -13,81 +22,102 @@ import java.util.Objects;
  */
 public class Location {
 
-    private String nameOfLocation;
-    private int locationId;
+    private String name_of_location;
+    private int locationdetail_id;
     private int floor;
 
     public Location() {
     }
 
-    public Location(String nameOfLocation, int locationId, int floor) {
-        this.nameOfLocation = nameOfLocation;
-        this.locationId = locationId;
-        this.floor = floor;
+    public String getName_of_location() {
+        return name_of_location;
     }
 
-    public String getNameOfLocationDetail() {
-        return this.nameOfLocation;
+    public void setName_of_location(String name_of_location) {
+        this.name_of_location = name_of_location;
     }
 
-    public void setNameOfLocationDetail(String nameOfLocationDetail) {
-        this.nameOfLocation = nameOfLocation;
+    public int getLocationdetail_id() {
+        return locationdetail_id;
     }
 
-    public int getLocationDetailId() {
-        return this.locationId;
-    }
-
-    public void setLocationDetailId(int locationDetailId) {
-        this.locationId = locationDetailId;
+    public void setLocationdetail_id(int locationdetail_id) {
+        this.locationdetail_id = locationdetail_id;
     }
 
     public int getFloor() {
-        return this.floor;
+        return floor;
     }
 
     public void setFloor(int floor) {
         this.floor = floor;
     }
 
-    public Location nameOfLocationDetail(String nameOfLocationDetail) {
-        this.nameOfLocation = nameOfLocationDetail;
-        return this;
-    }
-
-    public Location locationDetailId(int locationDetailId) {
-        this.locationId = locationId;
-        return this;
-    }
-
-    public Location floor(int floor) {
+    public Location(int locationdetail_id, int floor) {
+        this.locationdetail_id = locationdetail_id;
         this.floor = floor;
-        return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
+    private static void ORM(Location l, ResultSet rs) {
+        try {
+            l.setLocationdetail_id(rs.getInt("locationdetail_id"));
+            l.setName_of_location(rs.getString("name_of_location"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (!(o instanceof Location)) {
-            return false;
+    }
+
+    public static String getNameById(int id) throws SQLException {
+        String sqlCmd = "SELECT `name_of_location` FROM `location_detail` WHERE locationdetail_id = '" + id + "'";
+        Connection conn = ConnectionBuilder.getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sqlCmd);
+        String name = "";
+        if (rs.next()) {
+            name = rs.getString("name_of_location");
         }
-        Location location = (Location) o;
-        return Objects.equals(nameOfLocation, location.nameOfLocation) && locationId == location.locationId && floor == location.floor;
+        return name;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(nameOfLocation, locationId, floor);
+    public static Location getPlaceById(int locationdetail_id) {
+        Location l = null;
+        try {
+            Connection conn = ConnectionBuilder.getConnection();
+            Statement stmt = conn.createStatement();
+            String sqlCmd = "SELECT * FROM location_detail WHERE locationdetail_id = " + locationdetail_id;
+            ResultSet rs = stmt.executeQuery(sqlCmd);
+            while (rs.next()) {
+                l = new Location();
+                ORM(l, rs);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Location.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
     }
 
-    @Override
-    public String toString() {
-        return "{"
-                + " nameOfLocationDetail='" + getNameOfLocationDetail() + "'"
-                + ", locationDetailId='" + getLocationDetailId() + "'"
-                + ", floor='" + getFloor() + "'"
-                + "}";
+    public static ArrayList<Location> getAllLocation() {
+        Location l = null;
+        ArrayList<Location> locations = null;
+        try {
+            Connection conn = ConnectionBuilder.getConnection();
+            Statement stmt = conn.createStatement();
+            String sqlCmd = "SELECT * FROM location_detail";
+            ResultSet rs = stmt.executeQuery(sqlCmd);
+            while (rs.next()) {
+                l = new Location();
+                ORM(l, rs);
+                if (locations == null) {
+                    locations = new ArrayList<Location>();
+                }
+                locations.add(l);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return locations;
     }
+
 }
