@@ -17,13 +17,13 @@ public class TestConnectionDB {
         Connection con = null;
 
         try {
-            Class.forName("org.mariadb.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             Properties property = new Properties();
-            property.put("user", "root");
+            property.put("user", "tmepro");
             property.put("password", "tme123456");
             property.put("useEncoding", "true");
             property.put("characterEncoding", "UTF-8");
-            con = DriverManager.getConnection("jdbc:mariadb://35.240.139.209/tell_me_emergency?useUnicode=yes&amp;characterEncoding=utf8", property);
+            con = DriverManager.getConnection("jdbc:mysql://35.240.139.209/tell_me_emergency", property);
 
             if (con != null) {
                 System.out.println("Database Connected.");
