@@ -4,6 +4,7 @@
     Author     : LENOVO
 --%>
 <%@page import="tme.project.demo.model.Event"%>
+<%@page import="tme.project.demo.model.User"%>
 <%@page import="tme.project.demo.model.Location"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +19,7 @@
         <link rel="stylesheet" href="css\ListAllEvent.css">
         <title> List All Events</title>
     </head>
-    <body background="images\bg1.jpg">
+    <body background="images\bg1.jpg" align="center">
         <div class="logout">
 
 
@@ -26,6 +27,12 @@
                 <img src="images\logout .png" alt="">
                 <label>Log out</label> 
             </div> 
+
+            <%
+//                Event e = (Event) request.getAttribute("events");
+//                User u = User.getUser(e.getUserId());
+
+            %>
             <div class="OfficerID">
                 <h6>1129900455632</h6>
             </div>
@@ -49,7 +56,7 @@
                 </div>
 
                 <div class="emergency">
-                    <h6>Emergency :</h6>
+                    <h6>Emergency :  </h6>
                 </div>
 
                 <div class="information"></div>
@@ -58,7 +65,6 @@
         </div>
 
         <div class="menubar">
-
             <img src="images\first-aid-kit.png" alt="">
             <img src="images\checklist (3).png" alt="">
             <img src="images\alarm (1).png" alt="">

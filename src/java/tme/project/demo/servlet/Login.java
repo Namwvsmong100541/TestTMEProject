@@ -7,11 +7,14 @@ package tme.project.demo.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import tme.project.demo.datasource.Password;
+import tme.project.demo.model.User;
 
 /**
  *
@@ -37,7 +40,33 @@ public class Login extends HttpServlet {
         String alert = null;
         String message = null;
         
-        //เดี๋ยวมาแก้
+        if (request.getParameter("submit") != null) {
+            String user_username = request.getParameter("username");
+            String user_password = request.getParameter("password");
+            if (user_username != null && user_password != null) {
+                user_password=Password.getKeepPassword(user_password);
+                if (User.isStudent(user_username, user_password)) {
+                    try {
+                        String userId = User.getIdByUsername(user_username)+"";
+                        session.setAttribute("student_id", userId);
+                        session.setAttribute("isLoged", "yes");                     
+                        target = "/NotifyToOfficer.jsp";
+                    } catch (SQLException ex) {
+                        System.err.println(ex);
+                    }
+                } else {
+                    code = "Error";
+                    alert = "The username & password didn't match.";
+                    message = "Please Try again.";
+                }
+
+            } else {
+                code = "Error";
+                alert = "The username & password didn't match.";
+                message = "Please Try again.";
+            }
+
+        }
         
         request.setAttribute("code", code);
         request.setAttribute("alert", alert);

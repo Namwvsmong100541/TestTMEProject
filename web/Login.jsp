@@ -18,11 +18,15 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
 
-    <body background="images\bg1.jpg">
+    <body background="images\bg1.jpg" align="center">
         <div class="login">
             <div class="container">
-                <div class="logo">
-                    <img src="images\alarm.png" alt="">
+                    <img src="images\alarm.png" alt=""><br><br>
+                    <form>                       
+                        <input type="username"  class="form-control" id="exampleUsername" name="username" placeholder="Student ID">
+                        <input type="password" class="form-control" id="examplePassword" name="password" placeholder="Password"><br>
+                        <input type="submit" name="submit" class="btn btn-default btn-lg" value="Log in"></input>                        
+                    </form>
 
                     <%
                         if (request.getAttribute("code") != null) {
@@ -37,13 +41,6 @@
                         }
                     %> 
 
-                    <form>
-                        <input type="text" placeholder="&nbsp;&nbsp;Student ID"><br>
-                        <input type="text" placeholder="&nbsp;&nbsp;Password"><br>
-                        <label>Forget password ?</label><br>
-                        <button>Log In</button>
-
-                </div>
             </div>
         </div>
 

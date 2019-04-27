@@ -228,37 +228,37 @@ public class User {
         }
     }
 
-    public boolean addUser() {
-        try {
-            Connection conn = ConnectionBuilder.getConnection();
-            String sqlCmd = "INSERT INTO member(member_name, member_surname, member_stdId, member_gender, member_faculty, member_email,"
-                    + " member_username, member_password, member_position) VALUES(?,?,?,?,?,?,?,?,?)";
-            PreparedStatement pstm = conn.prepareStatement(sqlCmd);
-            pstm.setString(1, name);
-            pstm.setString(2, surname);
-            pstm.setLong(3, stdId);
-            pstm.setString(4, gender);
-            pstm.setString(5, faculty);
-            pstm.setString(6, email);
-            pstm.setString(7, username);
-            pstm.setString(8, password);
-            pstm.setInt(9, position);
-            int result = pstm.executeUpdate();
-            if (result != 0) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            System.err.println(ex);
-        }
-        return false;
-    }
+//    public boolean addUser() {
+//        try {
+//            Connection conn = ConnectionBuilder.getConnection();
+//            String sqlCmd = "INSERT INTO member(member_name, member_surname, member_stdId, member_gender, member_faculty, member_email,"
+//                    + " member_username, member_password, member_position) VALUES(?,?,?,?,?,?,?,?,?)";
+//            PreparedStatement pstm = conn.prepareStatement(sqlCmd);
+//            pstm.setString(1, name);
+//            pstm.setString(2, surname);
+//            pstm.setLong(3, stdId);
+//            pstm.setString(4, gender);
+//            pstm.setString(5, faculty);
+//            pstm.setString(6, email);
+//            pstm.setString(7, username);
+//            pstm.setString(8, password);
+//            pstm.setInt(9, position);
+//            int result = pstm.executeUpdate();
+//            if (result != 0) {
+//                return true;
+//            }
+//        } catch (SQLException ex) {
+//            System.err.println(ex);
+//        }
+//        return false;
+//    }
 
-    public static User getUser(int user_id) {
+    public static User getStudent(int student_id) {
         User u = null;
         try {
             Connection conn = ConnectionBuilder.getConnection();
             Statement stmt = conn.createStatement();
-            String sqlCmd = "SELECT * FROM user WHERE user_id = " + user_id;
+            String sqlCmd = "SELECT * FROM `Student` WHERE `Student_ID` = " + student_id;
             ResultSet rs = stmt.executeQuery(sqlCmd);
             while (rs.next()) {
                 u = new User();
@@ -271,33 +271,33 @@ public class User {
     }
 
     public static int getIdByUsername(String username) throws SQLException {
-        String sqlCmd = "SELECT `user_id` FROM `user` WHERE user_username = '" + username + "'";
+        String sqlCmd = "SELECT `Student_ID` FROM `Student` WHERE `Student_ID` = '" + username + "'";
         Connection conn = ConnectionBuilder.getConnection();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sqlCmd);
         int id = 0;
         if (rs.next()) {
-            id = rs.getInt("user_id");
+            id = rs.getInt("Student_ID");
         }
         return id;
     }
 
-    public static int getPositionByUsername(String username) throws SQLException {
-        String sqlCmd = "SELECT `member_position` FROM `member` WHERE member_username = '" + username + "'";
-        Connection conn = ConnectionBuilder.getConnection();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sqlCmd);
-        int id = 0;
-        if (rs.next()) {
-            id = rs.getInt("user_position");
-        }
-        return id;
-    }
+//    public static int getPositionByUsername(String username) throws SQLException {
+//        String sqlCmd = "SELECT `member_position` FROM `member` WHERE member_username = '" + username + "'";
+//        Connection conn = ConnectionBuilder.getConnection();
+//        Statement stmt = conn.createStatement();
+//        ResultSet rs = stmt.executeQuery(sqlCmd);
+//        int id = 0;
+//        if (rs.next()) {
+//            id = rs.getInt("user_position");
+//        }
+//        return id;
+//    }
 
-    public static boolean isUser(String user_username, String user_password) {
+    public static boolean isStudent(String user_username, String user_password) {
         try {
             Connection conn = ConnectionBuilder.getConnection();
-            String sqlCmd = "SELECT * FROM user WHERE user_username = '" + user_username + "' AND user_password = '"
+            String sqlCmd = "SELECT * FROM `Student` WHERE `Student_ID` = '" + user_username + "' AND `Password` = '"
                     + user_password + "'";
             PreparedStatement ps = conn.prepareStatement(sqlCmd);
             ResultSet rs = ps.executeQuery();
