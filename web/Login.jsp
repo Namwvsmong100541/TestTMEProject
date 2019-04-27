@@ -14,15 +14,15 @@
         <title>Tell Me Emergency</title>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-        <link rel="stylesheet" href="Login.css">
+        <link rel="stylesheet" href="css\Login.css">
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
 
-    <body background="TestProjecttME\web\img-TME\bg1.jpg">
+    <body background="images\bg1.jpg">
         <div class="login">
             <div class="container">
                 <div class="logo">
-                    <img src="TestProjectTME\web\img-TME\alarm.png" alt="">
+                    <img src="images\alarm.png" alt="">
 
                     <%
                         if (request.getAttribute("code") != null) {

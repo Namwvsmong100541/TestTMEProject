@@ -7,24 +7,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Emergency Notify</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-        <link rel="stylesheet" href="Notify.css">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Emergency Notify</title>
 
-
-    </head>
-    <body>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="css\Notify.css">
+    <body background="images\bg1.jpg"> 
         <div class="logout">
             <div class="container">
 
                 <div class="out">
-                    <img src="TestProjectTME\web\img-TME\logout .png" alt="">
+                    <img src="images\logout .png" alt="">
                     <label>Log out</label> 
 
                 </div> 
@@ -44,13 +39,13 @@
         <div class="specifyInformation">
             <div class="container">
                 <div class="attachPicture">
-                    <img src="TestProjecttME\web\img-TME\addpic.png" alt="">
+                    <img src="images\addpic.png" alt="">
 
                 </div>
                 <textarea name="comment" id="" cols="30" rows="4" placeholder="Specify information.."></textarea>
 
                 <div class="attachvoice">
-                    <img src="TestProjecttME\web\img-TME\addvoice.png" alt="">
+                    <img src="images\addvoice.png" alt="">
                 </div>
 
                 <div class="specifyphonenumber">
@@ -61,10 +56,10 @@
 
         <div class="menubar">
 
-            <img src="TestProjecttME\web\img-TME\first-aid-kit.png" alt="">
-            <img src="TestProjecttME\web\img-TME\checklist (3).png" alt="">
-            <img src="TestProjecttME\web\img-TME\alarm (1).png" alt="">
-            <img src="TestProjecttME\web\img-TME\profile.png" alt="">
+            <img src="images\first-aid-kit.png" alt="">
+            <img src="images\checklist (3).png" alt="">
+            <img src="images\alarm (1).png" alt="">
+            <img src="images\profile.png" alt="">
         </div>
 
     </body>

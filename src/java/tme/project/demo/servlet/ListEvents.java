@@ -38,11 +38,11 @@ public class ListEvents extends HttpServlet {
         String alert = null;
         String message = null;
         HttpSession session = request.getSession(false);
-        String position = (String) session.getAttribute("user_position");
+        String position = (String) session.getAttribute("position");
 
         if (session != null) {
-            if (session.getAttribute("user_id") != null && session.getAttribute("isLoged").equals("yes")) {
-                if (position.equals("1")) {
+            if (session.getAttribute("officer_id") != null && session.getAttribute("isLoged").equals("yes")) {
+                if (position.equals("2")) {
                     target = "/UpdateStatus.jsp";
                 }
                 List<Event> events = Event.getAllEvents();

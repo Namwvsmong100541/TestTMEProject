@@ -139,7 +139,7 @@ public class Event {
         Event e = null;
         try {
             Connection con = ConnectionBuilder.getConnection();
-            String sqlCmd = "SELECT * FROM emergency notify WHERE event_id = ?";
+            String sqlCmd = "SELECT * FROM Emergency_Notify WHERE event_id = ?";
             PreparedStatement pstm = con.prepareStatement(sqlCmd);
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
@@ -171,7 +171,7 @@ public class Event {
         try {
             Connection conn = ConnectionBuilder.getConnection();
             Statement stmt = conn.createStatement();
-            String sqlCmd = "SELECT * FROM emergency notify";
+            String sqlCmd = "SELECT * FROM emergency_notify";
             ResultSet rs = stmt.executeQuery(sqlCmd);
             while (rs.next()) {
                 e = new Event();
@@ -193,7 +193,7 @@ public class Event {
         try {
             Connection conn = ConnectionBuilder.getConnection();
             Statement stmt = conn.createStatement();
-            String sqlCmd = "SELECT * FROM `emergency notify` WHERE event_id = " + userId;
+            String sqlCmd = "SELECT * FROM `emergency_notify` WHERE event_id = " + userId;
             ResultSet rs = stmt.executeQuery(sqlCmd);
             while (rs.next()) {
                 e = new Event();
@@ -213,7 +213,7 @@ public class Event {
         if (name.length() > 0 && desc.length() > 0 && place.length() > 0) {
             try {
                 Connection conn = ConnectionBuilder.getConnection();
-                String sqlCmd = "INSERT INTO emergency notify(event_id, desc_emergency, place,status_id_fk,user_id) VALUES(?,?,?,0,?)";
+                String sqlCmd = "INSERT INTO emergency_notify(event_id, desc_emergency, place,status_id_fk,user_id) VALUES(?,?,?,0,?)";
                 PreparedStatement pstm = conn.prepareStatement(sqlCmd);
                 pstm.setString(1, name);
                 pstm.setString(2, desc);
@@ -233,7 +233,7 @@ public class Event {
     public static boolean update(int event_id, int status_id_fk) {
         try {
             Connection conn = ConnectionBuilder.getConnection();
-            String sqlCmd = "UPDATE emergency notify SET status_id_fk = " + status_id_fk + " WHERE event_id = " + event_id;
+            String sqlCmd = "UPDATE emergency_notify SET status_id_fk = " + status_id_fk + " WHERE event_id = " + event_id;
             PreparedStatement pstm = conn.prepareStatement(sqlCmd);
             int result = pstm.executeUpdate();
             if (result != 0) {
@@ -250,7 +250,7 @@ public class Event {
         try {
             Connection conn = ConnectionBuilder.getConnection();
             Statement stmt = conn.createStatement();
-            String sqlCmd = "SELECT * FROM emergency notify WHERE event_id = " + event_id;
+            String sqlCmd = "SELECT * FROM emergency_notify WHERE event_id = " + event_id;
             ResultSet rs = stmt.executeQuery(sqlCmd);
             while (rs.next()) {
                 e = new Event();
@@ -265,7 +265,7 @@ public class Event {
     public static boolean delete(int event_id) {
         try {
             Connection conn = ConnectionBuilder.getConnection();
-            String sqlCmd = "DELETE FROM emergency notify WHERE event_id = " + event_id;
+            String sqlCmd = "DELETE FROM emergency_notify WHERE event_id = " + event_id;
             PreparedStatement pstm = conn.prepareStatement(sqlCmd);
             int result = pstm.executeUpdate();
             if (result != 0) {
