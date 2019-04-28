@@ -29,8 +29,8 @@
             </div> 
 
             <%
-//                Event e = (Event) request.getAttribute("events");
-//                User u = User.getUser(e.getUserId());
+                Event e = (Event) request.getAttribute("events");
+                User u = User.getStudent(e.getUserId());
 
             %>
             <div class="OfficerID">
