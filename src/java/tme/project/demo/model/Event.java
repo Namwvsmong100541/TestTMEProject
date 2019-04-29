@@ -26,39 +26,22 @@ public class Event {
     private String name;
     private String desc;
     private String place;
+    private String phoneNumber;
     private int status;
-    private int userId;
+    private long stdId;
 
     public Event() {
     }
 
-    public Event(String name, String desc, String place) {
-        this.id = 0;
-        this.name = name;
+    public Event(String desc, String phoneNumber, long stdId) {
         this.desc = desc;
-        this.place = place;
-        this.status = 0;
+        this.phoneNumber = phoneNumber;
+        this.stdId = stdId;
     }
 
-    public Event(String name, String desc, String place, int userId) throws SQLException {
-        this.name = name;
-        this.desc = desc;
-        this.place = place;
-        this.status = 0;
-        this.userId = userId;
-    }
-
-    public Event(int id, String name, String desc, String place, int status, int userId) {
-        this.id = id;
-        this.name = name;
-        this.desc = desc;
-        this.place = place;
-        this.status = status;
-        this.userId = userId;
-    }
-
+    
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(int id) {
@@ -66,7 +49,7 @@ public class Event {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -74,7 +57,7 @@ public class Event {
     }
 
     public String getDesc() {
-        return this.desc;
+        return desc;
     }
 
     public void setDesc(String desc) {
@@ -82,59 +65,38 @@ public class Event {
     }
 
     public String getPlace() {
-        return this.place;
+        return place;
     }
 
     public void setPlace(String place) {
         this.place = place;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public int getStatus() {
-        return this.status;
+        return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
     }
 
-    public int getUserId() {
-        return this.userId;
+    public long getStdId() {
+        return stdId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setStdId(long stdId) {
+        this.stdId = stdId;
     }
-
-    public Event id(int id) {
-        this.id = id;
-        return this;
-    }
-
-    public Event name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public Event desc(String desc) {
-        this.desc = desc;
-        return this;
-    }
-
-    public Event place(String place) {
-        this.place = place;
-        return this;
-    }
-
-    public Event status(int status) {
-        this.status = status;
-        return this;
-    }
-
-    public Event userId(int userId) {
-        this.userId = userId;
-        return this;
-    }
-
+    
+    
     public static Event getEventById(int id) {
         Event e = null;
         try {
@@ -159,7 +121,7 @@ public class Event {
             e.setDesc(rs.getString("desc_emergency"));
             e.setPlace(rs.getString("location"));
             e.setStatus(rs.getInt("status_id_fk"));
-            e.setUserId(rs.getInt("officer_id_fk"));
+            e.setStdId(rs.getInt("officer_id_fk"));
         } catch (SQLException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -210,15 +172,14 @@ public class Event {
     }
 
     public boolean addEvent() {
-        if (name.length() > 0 && desc.length() > 0 && place.length() > 0) {
+        if (desc.length() > 0 && phoneNumber.length() > 0) {
             try {
                 Connection conn = ConnectionBuilder.getConnection();
-                String sqlCmd = "INSERT INTO emergency_notify(event_id, desc_emergency, place,status_id_fk,user_id) VALUES(?,?,?,0,?)";
+                String sqlCmd = "INSERT INTO Emergency_Notify(Desc_Emergency, Phonenumber,Status_ID,Student_ID) VALUES(?,?,0,?)";
                 PreparedStatement pstm = conn.prepareStatement(sqlCmd);
-                pstm.setString(1, name);
-                pstm.setString(2, desc);
-                pstm.setString(3, place);
-                pstm.setInt(4, userId);
+                pstm.setString(1, desc);
+                pstm.setString(2, phoneNumber);
+                pstm.setLong(3, stdId);
                 int result = pstm.executeUpdate();
                 if (result != 0) {
                     return true;
@@ -230,10 +191,10 @@ public class Event {
         return false;
     }
 
-    public static boolean update(int event_id, int status_id_fk) {
+    public static boolean update(int event_id, int status_id) {
         try {
             Connection conn = ConnectionBuilder.getConnection();
-            String sqlCmd = "UPDATE emergency_notify SET status_id_fk = " + status_id_fk + " WHERE event_id = " + event_id;
+            String sqlCmd = "UPDATE Emergency_Notify SET Status_ID_FK = " + status_id + " WHERE Event_ID = " + event_id;
             PreparedStatement pstm = conn.prepareStatement(sqlCmd);
             int result = pstm.executeUpdate();
             if (result != 0) {
@@ -250,7 +211,7 @@ public class Event {
         try {
             Connection conn = ConnectionBuilder.getConnection();
             Statement stmt = conn.createStatement();
-            String sqlCmd = "SELECT * FROM emergency_notify WHERE event_id = " + event_id;
+            String sqlCmd = "SELECT * FROM Emergency_Notify WHERE Event_ID = " + event_id;
             ResultSet rs = stmt.executeQuery(sqlCmd);
             while (rs.next()) {
                 e = new Event();
@@ -265,7 +226,7 @@ public class Event {
     public static boolean delete(int event_id) {
         try {
             Connection conn = ConnectionBuilder.getConnection();
-            String sqlCmd = "DELETE FROM emergency_notify WHERE event_id = " + event_id;
+            String sqlCmd = "DELETE FROM Emergency_Notify WHERE Event_ID = " + event_id;
             PreparedStatement pstm = conn.prepareStatement(sqlCmd);
             int result = pstm.executeUpdate();
             if (result != 0) {
@@ -280,9 +241,9 @@ public class Event {
 
     public String getStatusName() {
         if (status == 0) {
-            return "Received";
+            return "Accepted";
         } else if (status == 1) {
-            return "On going";
+            return "Pending";
         } else if (status == 2) {
             return "Finished";
         }

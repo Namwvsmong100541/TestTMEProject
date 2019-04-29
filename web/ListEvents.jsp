@@ -30,11 +30,11 @@
 
             <%
                 Event e = (Event) request.getAttribute("events");
-                User u = User.getStudent(e.getUserId());
+                User u = User.getStudent(e.getStdId());
 
             %>
             <div class="OfficerID">
-                <h6>1129900455632</h6>
+                <h6><%=session.getAttribute("Officer_ID")%></h6>
             </div>
 
         </div>

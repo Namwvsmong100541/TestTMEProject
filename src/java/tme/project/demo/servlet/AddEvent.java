@@ -39,13 +39,13 @@ public class AddEvent extends HttpServlet {
         String message = null;
         HttpSession session = request.getSession(false);
         if (session != null) {
-            if (session.getAttribute("user_id") != null && session.getAttribute("isLoged").equals("yes")) {
+            if (session.getAttribute("Student_ID") != null && session.getAttribute("isLoged").equals("yes")) {
                 try {
-                    String name = request.getParameter("name");
-                    String desc = request.getParameter("desc");
-                    String place = request.getParameter("place");
-                    int id = Integer.parseInt((String) session.getAttribute("user_id"));
-                    Event e = new Event(name, desc, place, id);
+                    String desc = request.getParameter("comment");
+                    String number = request.getParameter("number");
+                 //   String place = request.getParameter("place");
+                    long id = Integer.parseInt((String) session.getAttribute("Student_ID"));
+                    Event e = new Event(desc, number, id);
                     if (e.addEvent()) {
                         code = "success";
                         alert = "Success!";
