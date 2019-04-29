@@ -21,6 +21,10 @@ import tme.project.demo.datasource.ConnectionBuilder;
  */
 public class User {
 
+    static User getStudent(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private int id;
     private String name;
     private String surname;
@@ -219,8 +223,8 @@ public class User {
             u.setFaculty(rs.getString("user_faculty"));
             u.setEmail(rs.getString("user_email"));
             u.setUsername(rs.getString("user_username"));
-            u.setPassword(rs.getString("user_password"));
-            u.setStdId(rs.getLong("user_stdid"));
+            u.setPassword(rs.getString("Password"));
+            u.setStdId(rs.getLong("Student_ID"));
             u.setGender(rs.getString("user_gender"));
             u.setPosition(rs.getInt("user_position"));
         } catch (SQLException ex) {
@@ -253,12 +257,12 @@ public class User {
 //        return false;
 //    }
 
-    public static User getStudent(int student_id) {
+    public static User getStudent(long stdId) {
         User u = null;
         try {
             Connection conn = ConnectionBuilder.getConnection();
             Statement stmt = conn.createStatement();
-            String sqlCmd = "SELECT * FROM `Student` WHERE `Student_ID` = " + student_id;
+            String sqlCmd = "SELECT * FROM `Student` WHERE `Student_ID` = " + stdId;
             ResultSet rs = stmt.executeQuery(sqlCmd);
             while (rs.next()) {
                 u = new User();
@@ -270,16 +274,16 @@ public class User {
         return u;
     }
 
-    public static int getIdByUsername(String username) throws SQLException {
+    public static long getIdByUsername(String username) throws SQLException {
         String sqlCmd = "SELECT `Student_ID` FROM `Student` WHERE `Student_ID` = '" + username + "'";
         Connection conn = ConnectionBuilder.getConnection();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sqlCmd);
-        int id = 0;
+        long stdId = 0;
         if (rs.next()) {
-            id = rs.getInt("Student_ID");
+            stdId =  rs.getLong("Student_ID");
         }
-        return id;
+        return stdId;
     }
 
 //    public static int getPositionByUsername(String username) throws SQLException {
