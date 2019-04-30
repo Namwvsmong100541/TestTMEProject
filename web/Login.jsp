@@ -26,7 +26,7 @@
         <div class="login">
             <div class="container">
                 <img src="images\alarm.png" alt=""><br><br>
-                <form>                       
+                <form action="Login" method="post">                       
                     <input type="username"  class="form-control" id="exampleUsername" name="username" placeholder="Student ID or Username">
                     <input type="password" class="form-control" id="examplePassword" name="password" placeholder="Password"><br>
                     <input type="submit" name="submit" class="btn btn-default btn-lg" value="Log in"></input>   
