@@ -17,9 +17,7 @@
     <link rel="stylesheet" href="css\Notify.css">
     <body background="images\bg1.jpg" align="center"> 
         <div class="logout">
-            <div class="studentID">
-                <h6><%=session.getAttribute("Student_ID")%></h6>
-            </div>
+            
             <div class="container">
                 <div class="out">
                     <img src="images\logout .png" alt="">
