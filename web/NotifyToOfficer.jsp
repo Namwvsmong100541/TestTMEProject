@@ -21,7 +21,7 @@
             <div class="container">
                 <div class="out">
                     <img src="images\logout .png" alt="">
-                    <label><a href="Logout"> Log out</a></label> 
+                    <label><a href="Logout"><button type="button"> Log out</button></a></label> 
 
                 </div> 
 
