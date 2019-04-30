@@ -69,7 +69,7 @@
                     </div>
                     <br>
                 </form>
-                <input name="student_id" type="hidden" value="<%=session.getAttribute("Student_ID")%>">
+                <input name="username" type="hidden" value="<%=session.getAttribute("username")%>">
                 <button type="submit" name="submit" > SUBMIT </button>       
             </div>            
         </div>

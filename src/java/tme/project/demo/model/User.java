@@ -344,4 +344,21 @@ public class User {
         }
         return false;
         }
+    
+    public static boolean isAdmin(String user_username, String user_password) {
+        try {
+            Connection conn = ConnectionBuilder.getConnection();
+            String sqlCmd = "SELECT * FROM `Administrator` WHERE `Administrator_ID` = '" + user_username + "' AND `Password` = '"
+                    + user_password + "'";
+            PreparedStatement ps = conn.prepareStatement(sqlCmd);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+        }
     }
