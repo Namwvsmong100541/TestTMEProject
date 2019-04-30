@@ -4,6 +4,10 @@
     Author     : LENOVO
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html  lang="en">
@@ -21,29 +25,37 @@
     <body background="images\bg1.jpg" align="center">
         <div class="login">
             <div class="container">
-                    <img src="images\alarm.png" alt=""><br><br>
-                    <form>                       
-                        <input type="Student_ID"  class="form-control" id="exampleUsername" name="Student_ID" placeholder="Student ID">
-                        <input type="password" class="form-control" id="examplePassword" name="password" placeholder="Password"><br>
-                        <input type="submit" name="submit" class="btn btn-default btn-lg" value="Log in"></input>   
-                        <p>   </p>
-                    </form>
+                <img src="images\alarm.png" alt=""><br><br>
+                <form>                       
+                    <input type="Student_ID"  class="form-control" id="exampleUsername" name="Student_ID" placeholder="Student ID">
+                    <input type="password" class="form-control" id="examplePassword" name="password" placeholder="Password"><br>
+                    <input type="submit" name="submit" class="btn btn-default btn-lg" value="Log in"></input>   
+                    <p>   </p>
+                </form>
 
-                    <%
-                        if (request.getAttribute("code") != null) {
-                    %>
+                <%
+                    if (request.getAttribute("code") != null) {
+                %>
+
+
+
+                <div class="alert alert-success alert-<%=(String) request.getAttribute("code")%>">
+
                     <div class="alert alert-success alert-<%=(String) request.getAttribute("code")%>">                      
+
                         <strong>
                             <font color="#000000"><%=(String) request.getAttribute("alert")%>
                         </strong> <%=(String) request.getAttribute("message")%>
                         </font>
                     </div>
+
                     <%
                         }
-                    %> 
 
+                    %>
+
+                </div>
             </div>
-        </div>
 
 
 

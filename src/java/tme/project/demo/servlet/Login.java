@@ -43,20 +43,27 @@ public class Login extends HttpServlet {
         if (request.getParameter("submit") != null) {
             String user_username = request.getParameter("username");
             String user_password = request.getParameter("password");
+            
+            System.out.println(user_username);
+            System.out.println(user_password);
+            
             if (user_username != null && user_password != null) {
-                user_password=Password.getKeepPassword(user_password);
+//                user_password=Password.getKeepPassword(user_password);
+                System.out.println("get keep password" + user_password);
                 if (User.isStudent(user_username, user_password)) {
+                    System.out.println("this is student");
                     try {
                         String userId = User.getIdByUsername(user_username)+"";
                         session.setAttribute("student_id", userId);
                         session.setAttribute("isLoged", "yes");                     
                         target = "/NotifyToOfficer.jsp";
                     } catch (SQLException ex) {
+                        ex.printStackTrace();
                         System.err.println(ex);
                     }
                 } else {
                     code = "Error";
-                    alert = "The username & password didn't match.";
+                    alert = "The username & password didnt match.";
                     message = "Please Try again.";
                 }
 

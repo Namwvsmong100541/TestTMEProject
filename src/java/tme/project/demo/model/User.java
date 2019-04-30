@@ -232,30 +232,30 @@ public class User {
         }
     }
 
-//    public boolean addUser() {
-//        try {
-//            Connection conn = ConnectionBuilder.getConnection();
-//            String sqlCmd = "INSERT INTO member(member_name, member_surname, member_stdId, member_gender, member_faculty, member_email,"
-//                    + " member_username, member_password, member_position) VALUES(?,?,?,?,?,?,?,?,?)";
-//            PreparedStatement pstm = conn.prepareStatement(sqlCmd);
-//            pstm.setString(1, name);
-//            pstm.setString(2, surname);
-//            pstm.setLong(3, stdId);
-//            pstm.setString(4, gender);
-//            pstm.setString(5, faculty);
-//            pstm.setString(6, email);
-//            pstm.setString(7, username);
-//            pstm.setString(8, password);
-//            pstm.setInt(9, position);
-//            int result = pstm.executeUpdate();
-//            if (result != 0) {
-//                return true;
-//            }
-//        } catch (SQLException ex) {
-//            System.err.println(ex);
-//        }
-//        return false;
-//    }
+   public boolean addUser() {
+        try {
+            Connection conn = ConnectionBuilder.getConnection();
+            String sqlCmd = "INSERT INTO Student(user_name, user_surname, user_stdId, user_gender, user_faculty, user_email,"
+                    + " user_username, user_password, user_position) VALUES(?,?,?,?,?,?,?,?,?)";
+           PreparedStatement pstm = conn.prepareStatement(sqlCmd);
+            pstm.setString(1, name);
+            pstm.setString(2, surname);
+            pstm.setLong(3, stdId);
+            pstm.setString(4, gender);
+            pstm.setString(5, faculty);
+            pstm.setString(6, email);
+            pstm.setString(7, username);
+            pstm.setString(8, password);
+            pstm.setInt(9, position);
+            int result = pstm.executeUpdate();
+            if (result != 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+       }
+        return false;
+    }
 
     public static User getStudent(long stdId) {
         User u = null;
@@ -279,9 +279,17 @@ public class User {
         Connection conn = ConnectionBuilder.getConnection();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sqlCmd);
+
+        long id = 0;
+
         long stdId = 0;
+
         if (rs.next()) {
+
+            id = rs.getLong("Student_ID");
+
             stdId =  rs.getLong("Student_ID");
+
         }
         return stdId;
     }
@@ -305,6 +313,9 @@ public class User {
                     + user_password + "'";
             PreparedStatement ps = conn.prepareStatement(sqlCmd);
             ResultSet rs = ps.executeQuery();
+            
+            System.out.println("--------------------------");
+            System.out.println(rs);
             if (rs.next()) {
                 return true;
             }
@@ -314,5 +325,23 @@ public class User {
         }
         return false;
     }
+    
+    
+    
+    public static boolean isOfficer(String user_username, String user_password) {
+        try {
+            Connection conn = ConnectionBuilder.getConnection();
+            String sqlCmd = "SELECT * FROM `Officer` WHERE `Officer_ID` = '" + user_username + "' AND `Password` = '"
+                    + user_password + "'";
+            PreparedStatement ps = conn.prepareStatement(sqlCmd);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
 
-}
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+        }
+    }

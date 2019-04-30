@@ -27,6 +27,11 @@
 
                 </div> 
 
+                <div class="studentID">
+                    ${sessionScope.student_id}
+
+                </div>
+
             </div>
         </div>
 
@@ -47,7 +52,7 @@
         <%
             }
         %>
-        
+
         <div class="specifyInformation">
             <div class="container">
                 <form action="AddEvent" method="post">
