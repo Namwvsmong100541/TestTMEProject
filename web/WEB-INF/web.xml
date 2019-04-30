@@ -51,7 +51,7 @@
         <servlet-class>tme.project.demo.servlet.UpdateStatus</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LogOut</servlet-name>
+        <servlet-name>Logout</servlet-name>
         <servlet-class>tme.project.demo.servlet.Logout</servlet-class>
     </servlet>
     <servlet>
@@ -83,12 +83,12 @@
         <url-pattern>/UpdateStatus</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LogOut</servlet-name>
-        <url-pattern>/LogOut</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
